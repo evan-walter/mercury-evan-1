@@ -1,5 +1,8 @@
 import { useState } from 'react'
 import axios from 'axios'
+import Btn from './components/Btn'
+import Status from './components/Status'
+import JokeText from './components/JokeText'
 import './index.css'
 
 export default function App() {
@@ -12,6 +15,7 @@ export default function App() {
 
   const fetchData = async () => {
     try {
+      setShowPunchline(false)
       setLoading(true)
       const { data } = await axios.get(
         'https://karljoke.herokuapp.com/jokes/random'
@@ -20,36 +24,31 @@ export default function App() {
       setSetup(`${data.setup}`)
       setPunchline(`${data.punchline}`)
       setSuccess(true)
-      setLoading(false)
     } catch (err) {
       throw new Error(err)
       setFailure(true)
     }
+    setLoading(false)
   }
 
   return (
     <>
       <div className='px-10'>
         <div className='flex flex-col items-center justify-between max-w-2xl pb-10 mx-auto my-20 border-b border-gray-300 xs:flex-row'>
-          <button
-            className='py-5 mb-5 text-white transition bg-green-500 rounded-full px-7 hover:scale-105 xs:mb-0'
-            onClick={fetchData}
-          >
+          <Btn addClassNames='bg-green-500' onClick={fetchData}>
             Get A New Random Joke
-          </button>
+          </Btn>
           <a
             href='https://karljoke.herokuapp.com/'
             target='_blank'
-            className='text-blue-500 underline hover:text-blue-600'
+            className='mt-5 text-blue-500 underline hover:text-blue-600 xs:mt-0'
           >
             View API Docs
           </a>
         </div>
         <div class='max-w-2xl mx-auto flex flex-col'>
           {loading ? (
-            <p className='font-bold text-center text-gray-500 uppercase'>
-              Loading your joke...
-            </p>
+            <Status addClassNames='text-gray-500'>Loading your joke...</Status>
           ) : null}
           {success ? (
             <>
@@ -57,14 +56,14 @@ export default function App() {
                 <div className='absolute top-0 left-0 font-serif text-gray-200 text-9xl leading-0 -z-10'>
                   “
                 </div>
-                <p className='text-2xl'>{setup}</p>
+                <JokeText>{setup}</JokeText>
               </div>
-              <button
-                className='py-5 mx-auto mb-5 text-white transition bg-blue-600 rounded-full px-7 hover:scale-105'
+              <Btn
+                addClassNames='bg-blue-600 mx-auto'
                 onClick={() => setShowPunchline(!showPunchline)}
               >
                 {showPunchline ? 'Hide Punchline' : 'Show Punchline'}
-              </button>
+              </Btn>
             </>
           ) : null}
           {showPunchline ? (
@@ -72,13 +71,13 @@ export default function App() {
               <div className='absolute inset-y-0 right-0 font-serif text-gray-200 text-9xl leading-0 -z-10'>
                 ”
               </div>
-              <p className='text-2xl text-right'>{punchline}</p>
+              <JokeText addClassNames='text-right'>{punchline}</JokeText>
             </div>
           ) : null}
           {failure ? (
-            <p className='font-bold text-center text-red-700 uppercase'>
+            <Status addClassNames='text-red-700'>
               There was an error loading your joke.
-            </p>
+            </Status>
           ) : null}
         </div>
       </div>
