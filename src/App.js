@@ -34,7 +34,7 @@ export default function App() {
   return (
     <>
       <div className='px-10'>
-        <div className='flex flex-col items-center justify-between max-w-2xl pb-10 mx-auto my-20 border-b border-gray-300 xs:flex-row'>
+        <div className='flex flex-col items-center justify-between max-w-2xl pb-10 mx-auto mt-20 mb-10 border-b border-gray-300 xs:flex-row'>
           <Btn addClassNames='bg-green-500' onClick={fetchData}>
             Get A New Random Joke
           </Btn>
@@ -56,7 +56,7 @@ export default function App() {
                 <div className='absolute top-0 left-0 font-serif text-gray-200 text-9xl leading-0 -z-10'>
                   “
                 </div>
-                <JokeText>{setup}</JokeText>
+                <JokeText addClassNames='xs:text-left'>{setup}</JokeText>
               </div>
               <Btn
                 addClassNames='bg-blue-600 mx-auto'
@@ -71,7 +71,7 @@ export default function App() {
               <div className='absolute inset-y-0 right-0 font-serif text-gray-200 text-9xl leading-0 -z-10'>
                 ”
               </div>
-              <JokeText addClassNames='text-right'>{punchline}</JokeText>
+              <JokeText addClassNames='xs:text-right'>{punchline}</JokeText>
             </div>
           ) : null}
           {failure ? (
