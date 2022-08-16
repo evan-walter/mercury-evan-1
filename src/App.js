@@ -32,7 +32,7 @@ export default function App() {
       <div className='px-10'>
         <div className='flex flex-col items-center justify-between max-w-2xl pb-10 mx-auto my-20 border-b border-gray-300 xs:flex-row'>
           <button
-            className='p-4 mb-5 text-white transition bg-green-500 rounded-full hover:scale-105 xs:mb-0'
+            className='py-5 mb-5 text-white transition bg-green-500 rounded-full px-7 hover:scale-105 xs:mb-0'
             onClick={fetchData}
           >
             Get A New Random Joke
@@ -60,7 +60,7 @@ export default function App() {
                 <p className='text-2xl'>{setup}</p>
               </div>
               <button
-                className='p-4 mx-auto mb-5 text-white transition bg-blue-600 rounded-full hover:scale-105'
+                className='py-5 mx-auto mb-5 text-white transition bg-blue-600 rounded-full px-7 hover:scale-105'
                 onClick={() => setShowPunchline(!showPunchline)}
               >
                 {showPunchline ? 'Hide Punchline' : 'Show Punchline'}
